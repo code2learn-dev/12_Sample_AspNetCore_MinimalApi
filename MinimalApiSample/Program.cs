@@ -1,5 +1,6 @@
 using MinimalApiSample.MiddleWares;
 using MinimalApiSample.MinimalApiExtensions;
+using MinimalApiSample.MinimalApiExtensions.MinimalApiWithFilter;
 using MinimalApiSample.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,11 +59,17 @@ else
 
 // using Problem Details and ValidationProblem Details
 // for generating consistent response for all minimal api's
+//app
+//	.AllCategoriesProblemResult()
+//	.FindByIdProblemResult()
+//	.AddProblemResult()
+//	.EditProblemResult()
+//	.DeleteProblemResult();
+
+
+// adding category minimal apis with endpoint filters
 app
-	.AllCategoriesProblemResult()
-	.FindByIdProblemResult()
-	.AddProblemResult()
-	.EditProblemResult()
-	.DeleteProblemResult();
+	.FindCategoryValidateFilter()
+	.AddCategoryValidationFilter();
 
 app.Run();
