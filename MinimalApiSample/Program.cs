@@ -83,8 +83,15 @@ else
  فیلتر فکتوری یک فیلتر فاکنشن را به عنوان خروحی باز می گرداند که این فیلتر
  بازگشت داده شده با پایپ لاین اصلی ترکیب می شود
  */
-app.FindCategoryWithFilterFactory()
-   .DeleteCategoryWithFilterFactory()
-   .EditCategoryWIthFilterFactory();
+//app.FindCategoryWithFilterFactory()
+//   .DeleteCategoryWithFilterFactory()
+//   .EditCategoryWIthFilterFactory();
+
+
+// استفاده کردن از اینترفیس IEndpointFilter
+// کلاسی که از این اینترفیس ارث بری می کند یک متد بت نام InvokeAsync
+// را پیاده سازی نماید که آرگومان های ورودی آن کاملا مشابه آرگومان
+// بکار گرفته شده در یک فیلتر معمولی است
+app.FindCategoryEndpointFilter();
 
 app.Run();
