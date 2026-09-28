@@ -1,4 +1,4 @@
-using MinimalApiSample.MiddleWares;
+﻿using MinimalApiSample.MiddleWares;
 using MinimalApiSample.MinimalApiExtensions;
 using MinimalApiSample.MinimalApiExtensions.MinimalApiWithFilter;
 using MinimalApiSample.Models;
@@ -68,8 +68,23 @@ else
 
 
 // adding category minimal apis with endpoint filters
-app
-	.FindCategoryValidateFilter()
-	.AddCategoryValidationFilter();
+//app
+//	.FindCategoryValidateFilter()
+//	.AddCategoryValidationFilter();
+
+/*
+ در زمان استفاده کردن از فیلترهای معمولی هر یک از آرگومان های درخواستی باید
+ دقیقا در محل خواسته شده قرار داشته باشد به عنوان مثال در زمان تعریف کردن
+ یک مینیمال ای پی آی که دارای 2 آرگومان است امکان قرار گرفتن آرگومان آیدی
+ در آرگومان اول و یا دوم وجود دارد بنابراین امکان دسترسی به آرگومانی با ترتیب
+ اشتباه در زمان استفاده کردن از فیلترهای معمولی وجود دارد بنابرایت ما می توانیم
+ در چنین مواقعی از فیلتر فکتوری های استفاده کنیم که امکان تعریف یک فیلتر با
+ قابلیت استفاده بر روی چندین ایندپوینت را فراهم می کند
+ فیلتر فکتوری یک فیلتر فاکنشن را به عنوان خروحی باز می گرداند که این فیلتر
+ بازگشت داده شده با پایپ لاین اصلی ترکیب می شود
+ */
+app.FindCategoryWithFilterFactory()
+   .DeleteCategoryWithFilterFactory()
+   .EditCategoryWIthFilterFactory();
 
 app.Run();
