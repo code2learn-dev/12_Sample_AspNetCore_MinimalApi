@@ -1,5 +1,6 @@
 ﻿using MinimalApiSample.MiddleWares;
 using MinimalApiSample.MinimalApiExtensions;
+using MinimalApiSample.MinimalApiExtensions.MinimalApiRouteGroup;
 using MinimalApiSample.MinimalApiExtensions.MinimalApiWithFilter;
 using MinimalApiSample.Models;
 
@@ -92,6 +93,23 @@ else
 // کلاسی که از این اینترفیس ارث بری می کند یک متد بت نام InvokeAsync
 // را پیاده سازی نماید که آرگومان های ورودی آن کاملا مشابه آرگومان
 // بکار گرفته شده در یک فیلتر معمولی است
-app.FindCategoryEndpointFilter();
+//app.FindCategoryEndpointFilter();
+
+
+/*
+  به مرور زمان با زیاد شدن اندپوینت ها که به ازای هر یک از موجودیت ها باید
+  چهار عمل اصلی را برای هر یک پیاده سازی نماییم بنابراین در چنین حالتی
+  کدهای تکراری به ازای هر یک از اندپویت ها افزایش می یابد و از طرفی در صورتی که
+  ما فیلتری را برای هر یک از اندپوینت ها تعریف کرده باشیم احتمال فراموش کردن
+  اضافه کردن فیلتر به یک اندپوینت وجود دارد بنابراین در این حالت جهت کاهش تکرار 
+  و همچنین جهت اینکه بتوانیم به یک باره یک فیلتر تعریف شده را به تمامی اندپوینت ها
+  با مسیر پایه یکسان اضافه کنیم از Route Group ها استفاده می کنیم
+ */
+app.ConfigureCategoryMapGroups()
+	.CategoryMapGetRouteGroup()
+	.CategoryMapGetByIdRouteGroup()
+	.CategoryMapPostRouteGroup()
+	.CategoryMapDeleteRouteGroup()
+	.CategoryMapPutRouteConfig();
 
 app.Run();
