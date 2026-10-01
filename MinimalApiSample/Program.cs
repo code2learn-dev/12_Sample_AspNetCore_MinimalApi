@@ -1,8 +1,6 @@
 ﻿using MinimalApiSample.MiddleWares;
-using MinimalApiSample.MinimalApiExtensions;
-using MinimalApiSample.MinimalApiExtensions.MinimalApiRouteGroup;
-using MinimalApiSample.MinimalApiExtensions.MinimalApiWithFilter;
 using MinimalApiSample.Models;
+using MinimalApiSample.RoutingMinimalApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +13,13 @@ builder.Services.AddEndpointsApiExplorer();
 // we have to use IProblemDetailsService middleware
 // for complete this way we must using ExceptionHandlerMiddleware
 builder.Services.AddProblemDetails();
+
+builder
+	// config some configuration options
+	.ConfigApplicationOptions()
+	// config link generator Route Options
+	.ConfigureLinkGenerationWithRouteOptions();
+
 
 var app = builder.Build();
 
@@ -105,11 +110,21 @@ else
   و همچنین جهت اینکه بتوانیم به یک باره یک فیلتر تعریف شده را به تمامی اندپوینت ها
   با مسیر پایه یکسان اضافه کنیم از Route Group ها استفاده می کنیم
  */
-app.ConfigureCategoryMapGroups()
-	.CategoryMapGetRouteGroup()
-	.CategoryMapGetByIdRouteGroup()
-	.CategoryMapPostRouteGroup()
-	.CategoryMapDeleteRouteGroup()
-	.CategoryMapPutRouteConfig();
+//app.ConfigureCategoryMapGroups()
+//	.CategoryMapGetRouteGroup()
+//	.CategoryMapGetByIdRouteGroup()
+//	.CategoryMapPostRouteGroup()
+//	.CategoryMapDeleteRouteGroup()
+//	.CategoryMapPutRouteConfig();
+
+
+// routing samples in minimal api 
+//app.FindCategoryByIdRouting();
+
+
+// using link generator in minimal apis
+app
+	.GenerateCategoryListLinkGenerator()
+	.GetCategoryByIdLink();
 
 app.Run();
