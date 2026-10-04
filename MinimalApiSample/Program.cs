@@ -1,4 +1,5 @@
 ﻿using MinimalApiSample.MiddleWares;
+using MinimalApiSample.ModelBinding;
 using MinimalApiSample.Models;
 using MinimalApiSample.RoutingMinimalApi;
 
@@ -19,6 +20,10 @@ builder
 	.ConfigApplicationOptions()
 	// config link generator Route Options
 	.ConfigureLinkGenerationWithRouteOptions();
+
+
+// config minimal api json 
+builder.Services.ConfigJsonBodyInComplexTypes();
 
 
 var app = builder.Build();
@@ -123,8 +128,19 @@ else
 
 
 // using link generator in minimal apis
+//app
+//	.GenerateCategoryListLinkGenerator()
+//	.GetCategoryByIdLink();
+
+
+// all over minimal apis model binding states
 app
-	.GenerateCategoryListLinkGenerator()
-	.GetCategoryByIdLink();
+	//.SimpleTypeModelBinding()
+	//.ArrayModelBindig()
+	//.DefaultValueModelBinding()
+	//.CustomBinding()
+	.SearchCategoryByAsParameter()
+	.AddCategoryWithParameterValidationFilter()
+	.AddCategoryJustWithIdValidation();
 
 app.Run();
